@@ -11,8 +11,7 @@ export class RegisterDto {
   @Matches(/\d/, { message: "Use at least 8 characters, including a number." })
   password: string;
 
-  @IsIn(["student", "admin"])
-  role: "student" | "admin";
+ 
 }
 
 export class LoginDto {

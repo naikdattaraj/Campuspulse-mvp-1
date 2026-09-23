@@ -24,7 +24,6 @@ export default function LoginPage() {
   const [sent, setSent] = useState(false);
   const [busy, setBusy] = useState(false);
 
-  // already signed in? go straight to the right home
   useEffect(() => {
     if (ready && user) router.replace(user.role === "admin" ? "/admin" : "/dashboard");
   }, [ready, user, router]);
@@ -54,13 +53,13 @@ export default function LoginPage() {
     if (Object.keys(e).length) return;
 
     if (mode === "forgot") {
-      setSent(true); // Iteration 2: POST /auth/forgot-password
+      setSent(true);
       return;
     }
 
     setBusy(true);
     const res =
-      mode === "login" ? await login(email, password, role) : await register(name.trim(), email, password, role);
+      mode === "login" ? await login(email, password, role) : await register(name.trim(), email, password);
     setBusy(false);
 
     if (!res.ok) return setErrors({ form: res.error });
@@ -72,7 +71,7 @@ export default function LoginPage() {
     mode === "login"
       ? "Welcome back. Pick your role and sign in."
       : mode === "signup"
-      ? "Use your college email to get started."
+      ? "Use your college email to get started. New accounts are created as students — see an admin for staff access."
       : "Enter your college email and we will send a reset link.";
 
   return (
@@ -115,7 +114,7 @@ export default function LoginPage() {
               </div>
             )}
 
-            {mode !== "forgot" && (
+            {mode === "login" && (
               <fieldset className="roles">
                 <legend className="legend" style={{ marginBottom: 8 }}>I am a</legend>
                 <label className="role">

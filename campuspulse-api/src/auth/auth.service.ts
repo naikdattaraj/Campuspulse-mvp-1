@@ -22,11 +22,7 @@ export class AuthService {
 
     const hash = await bcrypt.hash(dto.password, 10);
     // NOTE: admin self-signup mirrors the UI in the design. Before production, make admin accounts invite-only.
-    const { rows } = await this.db.query<Row>(
-      `INSERT INTO users (name, email, password_hash, role) VALUES ($1, $2, $3, $4)
-       RETURNING id, name, email, role, password_hash`,
-      [dto.name.trim(), email, hash, dto.role],
-    );
+    const { rows } = await this.db.query( `INSERT INTO users (name, email, password_hash, role) VALUES ($1, $2, $3, 'student') RETURNING id, name, email, role, password_hash`, [dto.name.trim(), email, hash], );
     return this.session(rows[0]);
   }
 

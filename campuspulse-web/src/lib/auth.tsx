@@ -14,7 +14,7 @@ type AuthCtx = {
   user: User | null;
   ready: boolean;
   login: (email: string, password: string, role: Role) => Promise<AuthResult>;
-  register: (name: string, email: string, password: string, role: Role) => Promise<AuthResult>;
+  register: (name: string, email: string, password: string) => Promise<AuthResult>;
   logout: () => void;
 };
 
@@ -23,7 +23,6 @@ const SESSION_KEY = "cp_session";
 const USERS_KEY = "cp_users"; // mock mode only
 const TOKEN_KEY = "cp_token"; // real mode only
 
-// Guarded storage helpers: never let a blocked or empty store crash the UI.
 function read<T>(key: string, fallback: T): T {
   try {
     const raw = localStorage.getItem(key);
@@ -35,16 +34,12 @@ function read<T>(key: string, fallback: T): T {
 function write(key: string, value: unknown) {
   try {
     localStorage.setItem(key, JSON.stringify(value));
-  } catch {
-    /* ignore */
-  }
+  } catch {}
 }
 function remove(key: string) {
   try {
     localStorage.removeItem(key);
-  } catch {
-    /* ignore */
-  }
+  } catch {}
 }
 function hasToken() {
   try {
@@ -60,18 +55,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const saved = read<User | null>(SESSION_KEY, null);
-    // with the real API a session without a token is stale
     setUser(saved && (USE_MOCK || hasToken()) ? saved : null);
     setReady(true);
   }, []);
 
   const start = (s: Session) => {
-    if (!USE_MOCK) { try { localStorage.setItem(TOKEN_KEY, s.token); } catch {} }
+    if (!USE_MOCK) {
+      try {
+        localStorage.setItem(TOKEN_KEY, s.token);
+      } catch {}
+    }
     write(SESSION_KEY, s.user);
     setUser(s.user);
   };
 
-  // Real mode: POST /auth/login and /auth/register (Member 3's API). Mock mode: browser storage.
   const remote = async (path: string, body: object): Promise<AuthResult> => {
     try {
       const s = await request<Session>(path, {
@@ -102,13 +99,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return { ok: true, user };
   }, []);
 
-  const register: AuthCtx["register"] = useCallback(async (name, email, password, role) => {
-    if (!USE_MOCK) return remote("/auth/register", { name, email, password, role });
+  const register: AuthCtx["register"] = useCallback(async (name, email, password) => {
+    if (!USE_MOCK) return remote("/auth/register", { name, email, password });
 
     const all = [...DEMO_ACCOUNTS, ...read<Stored[]>(USERS_KEY, [])];
     if (all.some((u) => u.email.toLowerCase() === email.toLowerCase())) {
       return { ok: false, error: "An account with this email already exists. Log in instead." };
     }
+    const role: Role = "student";
     write(USERS_KEY, [...read<Stored[]>(USERS_KEY, []), { name, email, password, role }]);
     const user = { name, email, role };
     start({ token: "", user });
