@@ -176,13 +176,7 @@ export default function LoginPage() {
             )}
           </form>
 
-          {mode === "login" && (
-            <div className="demo">
-              Demo accounts (mock data)
-              <br />Student: <code>john@college.edu</code> / <code>Password123</code>
-              <br />Admin: <code>admin@college.edu</code> / <code>Admin1234</code>
-            </div>
-          )}
+          
         </div>
       </section>
     </main>
