@@ -1,0 +1,83 @@
+### Quick manual tests (VS Code "REST Client" extension, or copy into Postman)
+@base = http://localhost:4000
+
+### 1. Log in as the student, copy the token into @token below
+POST {{base}}/auth/login
+Content-Type: application/json
+
+{ "email": "john@college.edu", "password": "Password123", "role": "student" }
+
+###
+@token = PASTE_TOKEN_HERE
+
+### 2. Student dashboard
+GET {{base}}/dashboard/student
+Authorization: Bearer {{token}}
+
+### 3. Polls, then vote (replace ids from the list response)
+GET {{base}}/polls
+Authorization: Bearer {{token}}
+
+###
+POST {{base}}/polls/POLL_ID/vote
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "optionId": "OPTION_ID" }
+
+### 4. Events, then register
+GET {{base}}/events
+Authorization: Bearer {{token}}
+
+###
+POST {{base}}/events/EVENT_ID/register
+Authorization: Bearer {{token}}
+
+### 5. Career quiz and submit
+GET {{base}}/career/quiz
+Authorization: Bearer {{token}}
+
+###
+POST {{base}}/career/submit
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "answers": { "c1": 0, "c2": 1, "c3": 2, "c4": 0, "c5": 2, "c6": 1 } }
+
+###
+GET {{base}}/career/result
+Authorization: Bearer {{token}}
+
+### 6. Academic assessment
+GET {{base}}/assessments
+Authorization: Bearer {{token}}
+
+###
+GET {{base}}/assessments/dsa-quiz/start
+Authorization: Bearer {{token}}
+
+###
+POST {{base}}/assessments/dsa-quiz/submit
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "answers": { "a1": 1, "a2": 1, "a3": 2, "a4": 2, "a5": 1 }, "timeTakenSeconds": 300 }
+
+### 7. Admin: log in, then create a poll (student token must get 403)
+POST {{base}}/auth/login
+Content-Type: application/json
+
+{ "email": "admin@college.edu", "password": "Admin1234", "role": "admin" }
+
+###
+@adminToken = PASTE_ADMIN_TOKEN_HERE
+
+POST {{base}}/polls
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{ "title": "Which club should get extra funding?", "options": ["Coding club", "Music club"], "expiresOn": "2026-12-01" }
+
+###
+GET {{base}}/dashboard/admin
+Authorization: Bearer {{adminToken}}

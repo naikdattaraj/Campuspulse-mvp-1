@@ -1,0 +1,258 @@
+{
+  "career": [
+    {
+      "id": "c1",
+      "category": "technical",
+      "skill": "Learning new tools",
+      "text": "You need to learn a new tool for an assignment due in two days. What's your approach?",
+      "options": [
+        {
+          "text": "Follow the official quick-start, build a small sample, then apply it",
+          "points": 100
+        },
+        {
+          "text": "Watch a long tutorial series before touching anything",
+          "points": 50
+        },
+        {
+          "text": "Ask a friend to handle that part",
+          "points": 0
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "category": "technical",
+      "skill": "Debugging",
+      "text": "A bug shows up in production but not on your machine. What do you do first?",
+      "options": [
+        {
+          "text": "Add print statements and redeploy until something shows up",
+          "points": 50
+        },
+        {
+          "text": "Reproduce it with production-like settings and read the logs",
+          "points": 100
+        },
+        {
+          "text": "Change code at random until it disappears",
+          "points": 0
+        }
+      ]
+    },
+    {
+      "id": "c3",
+      "category": "soft",
+      "skill": "Time management",
+      "text": "Your team misses an internal deadline. What do you do?",
+      "options": [
+        {
+          "text": "Work extra alone and say nothing",
+          "points": 50
+        },
+        {
+          "text": "Wait for the mentor to decide what happens next",
+          "points": 0
+        },
+        {
+          "text": "Call a quick check-in, agree a new plan and share it",
+          "points": 100
+        }
+      ]
+    },
+    {
+      "id": "c4",
+      "category": "soft",
+      "skill": "Public speaking",
+      "text": "You present your project to 50 people tomorrow. How do you prepare?",
+      "options": [
+        {
+          "text": "Outline key points, rehearse aloud twice and time it",
+          "points": 100
+        },
+        {
+          "text": "Read the slides word for word",
+          "points": 50
+        },
+        {
+          "text": "Improvise on the day",
+          "points": 0
+        }
+      ]
+    },
+    {
+      "id": "c5",
+      "category": "aptitude",
+      "skill": "Quantitative reasoning",
+      "text": "Two people finish a task in 6 hours at the same pace. How long would three people take?",
+      "options": [
+        {
+          "text": "9 hours",
+          "points": 0
+        },
+        {
+          "text": "3 hours",
+          "points": 0
+        },
+        {
+          "text": "4 hours",
+          "points": 100
+        }
+      ]
+    },
+    {
+      "id": "c6",
+      "category": "aptitude",
+      "skill": "Pattern reasoning",
+      "text": "Which number completes the series 2, 6, 12, 20, ?",
+      "options": [
+        {
+          "text": "28",
+          "points": 0
+        },
+        {
+          "text": "30",
+          "points": 100
+        },
+        {
+          "text": "26",
+          "points": 0
+        }
+      ]
+    }
+  ],
+  "assessment": {
+    "id": "dsa-quiz",
+    "title": "Data Structures and Algorithms Quiz",
+    "minutes": 15,
+    "passingScore": 60,
+    "instructions": [
+      "This test contains 10 multiple choice questions.",
+      "You have 15 minutes to complete it. The test submits itself when time runs out.",
+      "You can flag questions and come back to them before you submit.",
+      "Once submitted, you cannot change your answers."
+    ],
+    "questions": [
+      {
+        "id": "a1",
+        "category": "Technical Knowledge",
+        "text": "Which data structure follows the LIFO (Last In, First Out) principle?",
+        "options": [
+          "Queue",
+          "Stack",
+          "Binary search tree",
+          "Graph"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "a2",
+        "category": "Technical Knowledge",
+        "text": "What is the time complexity of binary search on a sorted array?",
+        "options": [
+          "O(n)",
+          "O(log n)",
+          "O(n log n)",
+          "O(1)"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "a3",
+        "category": "Technical Knowledge",
+        "text": "Which sorting algorithm guarantees O(n log n) time even in the worst case?",
+        "options": [
+          "Quick sort",
+          "Bubble sort",
+          "Merge sort",
+          "Insertion sort"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "a4",
+        "category": "Technical Knowledge",
+        "text": "An inorder traversal of a binary search tree visits the keys in what order?",
+        "options": [
+          "Random order",
+          "Descending order",
+          "Ascending order",
+          "Level by level"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "a5",
+        "category": "Problem Solving",
+        "text": "Which data structure is normally used to implement breadth-first search?",
+        "options": [
+          "Stack",
+          "Queue",
+          "Heap",
+          "Set"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "a6",
+        "category": "Problem Solving",
+        "text": "What is the average time to look up a key in a hash table with a good hash function?",
+        "options": [
+          "O(1)",
+          "O(n)",
+          "O(log n)",
+          "O(n squared)"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "id": "a7",
+        "category": "Problem Solving",
+        "text": "What is the space complexity of a recursive factorial function for input n?",
+        "options": [
+          "O(1)",
+          "O(n)",
+          "O(log n)",
+          "O(n squared)"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "a8",
+        "category": "Logical Reasoning",
+        "text": "Which technique finds a cycle in a linked list using constant extra space?",
+        "options": [
+          "Fast and slow pointers",
+          "Sorting the nodes",
+          "Binary search",
+          "Using a stack"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "id": "a9",
+        "category": "Logical Reasoning",
+        "text": "On an empty stack you push 1, push 2, pop, push 3, pop. What value did the last pop return?",
+        "options": [
+          "3",
+          "2",
+          "1",
+          "The stack is empty"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "id": "a10",
+        "category": "Logical Reasoning",
+        "text": "A queue holds [1, 2, 3] with 1 at the front. After one dequeue and then enqueue(4), which element is at the front?",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "correctIndex": 1
+      }
+    ]
+  }
+}
